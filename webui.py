@@ -101,6 +101,15 @@ def normalise_filename(fn):
             out += "_"
     return out
 #}}}
+#{{{ authenticate
+def authenticate(mode=Trueusername, password):
+    uhashed = hashlib.sha256(str(username).encode('utf-8')).hexdigest()
+    phashed = hashlib.sha256(str(password).encode('utf-8')).hexdigest()
+    if uhashed == 'xxx' and phashed == 'yyy':
+        return True
+    else:
+        return False
+#}}}
 #{{{ get_config
 def get_config():
     config = {}
@@ -236,6 +245,7 @@ def server_static(path):
 #}}}
 #{{{ main
 @bottle.route('/')
+@bottle.auth_basic(authenticate)
 @bottle.view('main')
 def main():
     config = get_config()
