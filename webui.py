@@ -102,9 +102,11 @@ def normalise_filename(fn):
     return out
 #}}}
 #{{{ authenticate
-def authenticate(mode=Trueusername, password):
+def authenticate(username, password):
     uhashed = hashlib.sha256(str(username).encode('utf-8')).hexdigest()
     phashed = hashlib.sha256(str(password).encode('utf-8')).hexdigest()
+    # sha256 hash tool can be found easily on the internet
+    # Insert sha256-hashed username and password here
     if uhashed == 'xxx' and phashed == 'yyy':
         return True
     else:
